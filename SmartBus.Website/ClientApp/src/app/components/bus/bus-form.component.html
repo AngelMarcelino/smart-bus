@@ -1,0 +1,15 @@
+<form [formGroup]="busForm" (ngSubmit)="onSubmit($event)">
+  <div class="form-group">
+    <label>
+      Marca
+    </label>
+    <input class="form-control" type="text" name="brand" formControlName="brand"/>
+  </div>
+  <div class="form-group">
+    <label>
+      Modelo
+    </label>
+    <input class="form-control" type="text" name="model" formControlName="model"/>
+  </div>
+  <button class="btn btn-primary"[disabled]="busForm.invalid">Guardar</button>
+</form>

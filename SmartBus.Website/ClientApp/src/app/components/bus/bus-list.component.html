@@ -1,14 +1,21 @@
-<table>
+<h1>Autobuses</h1>
+<a class="btn btn-primary" [routerLink]="['/', 'autobuses', 'add']">Agregar</a>
+<table class="table">
   <thead>
     <tr>
-      <td>Marca</td>
-      <td>Modelo</td>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let bus of busses">
+    <tr *ngFor="let bus of buses">
       <td>{{bus.brand}}</td>
       <td>{{bus.model}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(bus.id)">Editar</button>
+        <button class="btn btn-danger" (click)="delete(bus.id)">Eliminar</button>
+      </td>
     </tr>
   </tbody>
 </table>

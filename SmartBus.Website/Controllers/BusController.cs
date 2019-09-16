@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Controllers
 {
-    public class BusController : ControllerBase
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BusController : Controller
     {
         private readonly IBusService busService;
 

@@ -13,6 +13,7 @@ export class BusService {
     return this.http.put(this.baseUrl, bus);
   }
   create(bus: IBus) {
+    console.log('bus: ', bus);
     return this.http.post(this.baseUrl, bus);
   }
   get(id: number): Observable<IBus> {
@@ -20,6 +21,9 @@ export class BusService {
   }
 
   getAll(): Observable<IBus[]> {
-
+    return this.http.get<IBus[]>(this.baseUrl);
+  }
+  delete(id: number) {
+    return this.http.delete(this.baseUrl + '/' + id);
   }
 }
