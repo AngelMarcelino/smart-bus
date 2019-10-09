@@ -11,12 +11,12 @@ Utilizamos Angular 8 para la aplicación cliente.
 Proyecto creado para a materia de Programación Web
 
 ## Dependencias
-###Visual Studio Community
+**Visual Studio Community**
 Se puede encontrar en https://visualstudio.microsoft.com/es/vs/community/
 Al instalar seleccionar la carga de trabajo "Desarrollo de ASP.NET y Web"
 
-###SQL Server
+**SQL Server**
     Descargar de https://www.microsoft.com/en-us/sql-server/sql-server-downloads e instalar
 
-###NodeJS
+**NodeJS**
 Descargar de https://nodejs.org/en/download/ e instalar
