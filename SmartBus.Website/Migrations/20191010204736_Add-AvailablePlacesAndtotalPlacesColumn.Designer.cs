@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBus.Website.Data;
 
 namespace SmartBus.Website.Migrations
 {
     [DbContext(typeof(SmartBusDbContext))]
-    partial class SmartBusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191010204736_Add-AvailablePlacesAndtotalPlacesColumn")]
+    partial class AddAvailablePlacesAndtotalPlacesColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

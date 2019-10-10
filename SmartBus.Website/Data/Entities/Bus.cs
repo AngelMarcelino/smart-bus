@@ -10,5 +10,7 @@ namespace SmartBus.Website.Data.Entities
         public int Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+        public int AvailablePlaces { get; set; }
+        public int TotalPlaces { get; set; }
     }
 }
