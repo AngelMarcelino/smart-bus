@@ -1,14 +1,13 @@
 # Proyecto SmartBus
 
 Por Angel Marcelino Gonzalez Mayoral y Eric López Solís
-
+Proyecto creado para a materia de Programación Web
+---
 ## Frameworks y librerías utilizadas
 
 Estte proyecto está hecho con Asp.NET Core y Entity framework configurado con SQL Server para el servidor
 Utilizamos Angular 8 para la aplicación cliente.
 
-
-Proyecto creado para a materia de Programación Web
 
 ## Dependencias
 **Visual Studio Community**
