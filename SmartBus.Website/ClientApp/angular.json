@@ -25,9 +25,16 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css",
+              "node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/fontawesome.min.css",
+              "node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/brands.min.css",
+              "node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/solid.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"
+            ]
+
           },
           "configurations": {
             "production": {

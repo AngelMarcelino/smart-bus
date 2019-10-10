@@ -1,6 +1,10 @@
-<body>
+<div id="wrapper">
   <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <div class="container-fluid" id="actual-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
-</body>
+</div>

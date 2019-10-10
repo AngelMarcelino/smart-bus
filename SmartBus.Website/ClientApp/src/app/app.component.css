@@ -3,4 +3,11 @@
   .body-content {
     padding-top: 50px;
   }
+
+
+}
+
+#actual-content {
+  padding-top: 4em;
+  display: block;
 }
