@@ -13,8 +13,12 @@ Utilizamos Angular 8 para la aplicación cliente.
 Se puede descargar en el enlace [Visual Sudio Community](https://visualstudio.microsoft.com/es/vs/community/)
 Al instalar seleccionar la carga de trabajo "Desarrollo de ASP.NET y Web"
 
+**.NET Core  SDK v2.2**
+Se puede descargar en el enlace [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2/)
+
+
 **SQL Server**
-    Descargar [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) e instalar
+    Descargar [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads/) e instalar
     1. Instalar una instancia
 
 **NodeJS**
