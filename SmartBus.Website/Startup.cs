@@ -1,13 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using SmartBus.Website.Data;
 using SmartBus.Website.Services;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace SmartBus.Website
 {
@@ -29,6 +35,30 @@ namespace SmartBus.Website
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+               .AddEntityFrameworkStores<SmartBusDbContext>()
+               .AddDefaultTokenProviders();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = Configuration["JwtConfiguration:Issuer"],
+                    ValidAudience = Configuration["JwtConfiguration:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtConfiguration:Key"])),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+            
             services.AddScoped<IBusService, BusService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
