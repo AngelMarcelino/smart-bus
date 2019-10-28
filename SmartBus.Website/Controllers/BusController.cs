@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartBus.Website.Data.Entities;
 using SmartBus.Website.Services;
 using System;
@@ -10,6 +11,7 @@ namespace SmartBus.Website.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BusController : Controller
 
         //77301499
