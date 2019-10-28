@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { GuardNoAuthService } from './services/auth/guard-no-auth.service';
 import { AuthService } from './services/auth.service';
 import { UiNotificationsService } from './services/ui-notifications/ui-notifications.service';
 import { AlertUINotificationsService } from './services/ui-notifications/alert-ui-notifications.service';
+import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,11 @@ import { AlertUINotificationsService } from './services/ui-notifications/alert-u
     {
       provide: UiNotificationsService,
       useClass: AlertUINotificationsService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

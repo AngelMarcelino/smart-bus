@@ -4,7 +4,7 @@ import { Observable, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginModel } from '../models/login-model';
 
-const AuthTokenKey = 'AuthToken';
+export const AuthTokenKey = 'AuthToken';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +20,10 @@ export class AuthService {
     .pipe(tap(token => {
       localStorage.setItem(AuthTokenKey, token);
     }));
+  }
+
+  clearToken() {
+    localStorage.removeItem(AuthTokenKey);
   }
 
   isAuthenticated() {
