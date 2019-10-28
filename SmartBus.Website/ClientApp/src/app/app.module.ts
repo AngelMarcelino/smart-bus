@@ -9,13 +9,24 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { BusFormComponent } from './components/bus/bus-form.component';
 import { BusService } from './services/bus.service';
 import { BusListComponent } from './components/bus/bus-list.component';
+import { MainViewAuthenticateComponent } from './main-view-authenticated/main-view-authenticated.component';
+import { MainViewNoAuthenticatedComponent } from './main-view-no-authenticated/main-view-no-authenticated.component';
+import { LoginComponent } from './login/login.component';
+import { GuardAuthService } from './services/auth/guard-auth.service';
+import { GuardNoAuthService } from './services/auth/guard-no-auth.service';
+import { AuthService } from './services/auth.service';
+import { UiNotificationsService } from './services/ui-notifications/ui-notifications.service';
+import { AlertUINotificationsService } from './services/ui-notifications/alert-ui-notifications.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     BusListComponent,
-    BusFormComponent
+    BusFormComponent,
+    MainViewAuthenticateComponent,
+    MainViewNoAuthenticatedComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -23,28 +34,53 @@ import { BusListComponent } from './components/bus/bus-list.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'autobuses', pathMatch: 'full' },
       {
-        path: 'autobuses',
+        canActivate: [GuardNoAuthService],
+        path: 'no-auth',
+        component: MainViewNoAuthenticatedComponent,
         children: [
           {
-            path: '',
-            component: BusListComponent
-          },
-          {
-            path: 'add',
-            component: BusFormComponent
-          },
-          {
-            path: 'edit/:id',
-            component: BusFormComponent
+            path: 'login',
+            component: LoginComponent
           }
         ]
       },
+      {
+        path: '',
+        canActivate: [GuardAuthService],
+        component: MainViewAuthenticateComponent,
+        children: [
+          { path: '', redirectTo: 'autobuses', pathMatch: 'full' },
+          {
+            path: 'autobuses',
+            children: [
+              {
+                path: '',
+                component: BusListComponent
+              },
+              {
+                path: 'add',
+                component: BusFormComponent
+              },
+              {
+                path: 'edit/:id',
+                component: BusFormComponent
+              }
+            ]
+          }
+        ]
+      }
     ])
   ],
   providers: [
-    BusService
+    BusService,
+    GuardAuthService,
+    GuardNoAuthService,
+    AuthService,
+    {
+      provide: UiNotificationsService,
+      useClass: AlertUINotificationsService
+    }
   ],
   bootstrap: [AppComponent]
 })
