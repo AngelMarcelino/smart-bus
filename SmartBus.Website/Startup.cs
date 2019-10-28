@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SmartBus.Website.Data;
+using SmartBus.Website.Data.Entities;
 using SmartBus.Website.Services;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -59,7 +60,8 @@ namespace SmartBus.Website
                 };
             });
             
-            services.AddScoped<IBusService, BusService>();
+            services.AddScoped<Service<Bus>>();
+            services.AddScoped<Service<Driver>>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

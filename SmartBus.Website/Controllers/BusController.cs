@@ -16,9 +16,9 @@ namespace SmartBus.Website.Controllers
 
         //77301499
     {
-        private readonly IBusService busService;
+        private readonly Service<Bus> busService;
 
-        public BusController(IBusService busService)
+        public BusController(Service<Bus> busService)
         {
             this.busService = busService;
         }
@@ -26,19 +26,19 @@ namespace SmartBus.Website.Controllers
         [HttpGet("{id}")]
         public Task<Bus> Get(int id)
         {
-            return this.busService.GetBusAsync(id);
+            return this.busService.GetAsync(id);
         }
 
         [HttpGet]
         public Task<IEnumerable<Bus>> Get()
         {
-            return this.busService.GetBusesAsync();
+            return this.busService.GetEntitiesAsync();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Bus bus)
         {
-            await this.busService.CreateAsync(bus);
+            await this.busService.AddAsync(bus);
             return Ok();
         }
         [HttpPut]

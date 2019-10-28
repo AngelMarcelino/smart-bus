@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data.Entities
 {
-    public class Trip
+    public class Trip : IEntity
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }

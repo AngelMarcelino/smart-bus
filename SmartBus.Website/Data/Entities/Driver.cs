@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data.Entities
 {
-    public class Driver
+    public class Driver : IEntity
     {
         public int Id { get; set; }
         [Required]

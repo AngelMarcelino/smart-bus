@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data.Entities
 {
-    public class UserCategory : IEntity
+    public interface IEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        int Id { get; set; }
     }
 }

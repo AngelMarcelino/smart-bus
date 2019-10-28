@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data.Entities
 {
-    public class Passage
+    public class Passage : IEntity
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
