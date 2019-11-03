@@ -18,6 +18,9 @@ import { AuthService } from './services/auth.service';
 import { UiNotificationsService } from './services/ui-notifications/ui-notifications.service';
 import { AlertUINotificationsService } from './services/ui-notifications/alert-ui-notifications.service';
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
+import { DriverListComponent } from './components/driver/driver-list.component';
+import { DriverFormComponent } from './components/driver/driver-form.component';
+import { DriverService } from './services/driver.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { AuthInterceptorService } from './services/auth/auth-interceptor.service
     BusFormComponent,
     MainViewAuthenticateComponent,
     MainViewNoAuthenticatedComponent,
-    LoginComponent
+    LoginComponent,
+    DriverFormComponent,
+    DriverListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,6 +73,23 @@ import { AuthInterceptorService } from './services/auth/auth-interceptor.service
                 component: BusFormComponent
               }
             ]
+          },
+          {
+            path: 'drivers',
+            children: [
+              {
+                path: '',
+                component: DriverListComponent
+              },
+              {
+                path: 'add',
+                component: DriverFormComponent
+              },
+              {
+                path: 'edit/:id',
+                component: DriverFormComponent
+              }
+            ]
           }
         ]
       }
@@ -86,7 +108,8 @@ import { AuthInterceptorService } from './services/auth/auth-interceptor.service
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
-    }
+    },
+    DriverService
   ],
   bootstrap: [AppComponent]
 })

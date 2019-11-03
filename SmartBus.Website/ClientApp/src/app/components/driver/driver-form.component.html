@@ -1,0 +1,23 @@
+<form [formGroup]="driverForm" (ngSubmit)="onSubmit($event)">
+  <div class="form-group">
+    <label>
+      Nombre
+    </label>
+    <input class="form-control" type="text" name="name" formControlName="name"/>
+  </div>
+  <div class="form-group">
+    <label>
+      Fecha de registro
+    </label>
+    <input class="form-control" type="date" name="registerDate" formControlName="registerDate"/>
+  </div>
+  <div class="form-group">
+    <label>
+      Phone
+    </label>
+    <input class="form-control" type="text" name="phone" formControlName="phone"/>
+    <input class="form-control" type="hidden" name="id" formControlName="id"/>
+  </div>
+  <button class="btn btn-primary"[disabled]="driverForm.invalid">Guardar</button>
+  <button class="btn btn-secondary ml-2" [routerLink]="['/drivers']" routerLinkActive="router-link-active" >Cancelar</button>
+</form>

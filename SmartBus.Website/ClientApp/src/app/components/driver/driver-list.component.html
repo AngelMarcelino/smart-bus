@@ -1,0 +1,26 @@
+<h1>Choferes</h1>
+<a href="#" [routerLink]="['/', 'drivers', 'add']" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+  <i class="fas fa-plus fa-sm text-white-50"></i>
+  Agregar
+</a>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fecha de registro</th>
+      <th>Telefono</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let driver of drivers">
+      <td>{{driver.name}}</td>
+      <td>{{driver.registerDate | date}}</td>
+      <td>{{driver.phone}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(driver.id)">Editar</button>
+        <button class="btn btn-danger ml-2" (click)="delete(driver.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
