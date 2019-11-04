@@ -20,6 +20,7 @@ namespace SmartBus.Website.Data
         public DbSet<Passage> Passages { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<UserCategory> UserCategories { get; set; }
+        public DbSet<Route> Routes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

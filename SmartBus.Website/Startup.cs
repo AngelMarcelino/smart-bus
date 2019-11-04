@@ -67,6 +67,7 @@ namespace SmartBus.Website
             services.AddScoped<Service<Bus>>();
             services.AddScoped<Service<Driver>>();
             services.AddScoped<Service<Trip>>();
+            services.AddScoped<Service<Route>>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

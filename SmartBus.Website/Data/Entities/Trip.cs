@@ -15,5 +15,7 @@ namespace SmartBus.Website.Data.Entities
         public int BusId { get; set; }
         public Bus Bus { get; set; }
         public ICollection<Passage> Passages { get; set; }
+        public Route Route { get; set; }
+        public int RouteId { get; set; }
     }
 }
