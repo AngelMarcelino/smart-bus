@@ -24,6 +24,9 @@ import { DriverService } from './services/driver.service';
 import { TripService } from './services/trip.service';
 import { TripListComponent } from './components/trips/trip-list.component';
 import { TripFormComponent } from './components/trips/trip-form.component';
+import { RouteFormComponent } from './components/routes/route-form.component';
+import { RouteListComponent } from './components/routes/route-list.component';
+import { RouteService } from './services/route.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { TripFormComponent } from './components/trips/trip-form.component';
     DriverFormComponent,
     DriverListComponent,
     TripListComponent,
-    TripFormComponent
+    TripFormComponent,
+    RouteFormComponent,
+    RouteListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -112,6 +117,23 @@ import { TripFormComponent } from './components/trips/trip-form.component';
                 component: TripFormComponent
               }
             ]
+          },
+          {
+            path: 'routes',
+            children: [
+              {
+                path: '',
+                component: RouteListComponent
+              },
+              {
+                path: 'add',
+                component: RouteFormComponent
+              },
+              {
+                path: 'edit/:id',
+                component: RouteFormComponent
+              }
+            ]
           }
         ]
       }
@@ -132,7 +154,8 @@ import { TripFormComponent } from './components/trips/trip-form.component';
       multi: true
     },
     DriverService,
-    TripService
+    TripService,
+    RouteService
   ],
   bootstrap: [AppComponent]
 })

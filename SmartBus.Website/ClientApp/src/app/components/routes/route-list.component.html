@@ -1,0 +1,28 @@
+<h1>Rutas</h1>
+<a href="#" [routerLink]="['/', 'routes', 'add']" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+  <i class="fas fa-plus fa-sm text-white-50"></i>
+  Agregar
+</a>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Nombre </th>
+      <th>Hora de primera salida</th>
+      <th>Hora de última salida</th>
+      <th>Intervalo de salidas en minutos</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let route of routes">
+      <td>{{route.name}}</td>
+      <td>{{route.firstLeavingHour | date: timeFormat}}</td>
+      <td>{{route.lastLeavingHour | date: timeFormat}}</td>
+      <td>{{route.intervalInMinutes}} minutos</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(route.id)">Editar</button>
+        <button class="btn btn-danger ml-2" (click)="delete(route.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
