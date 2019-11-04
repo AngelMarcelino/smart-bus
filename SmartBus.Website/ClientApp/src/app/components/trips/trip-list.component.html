@@ -1,0 +1,27 @@
+<h1>Viajes</h1>
+<!-- <a href="#" [routerLink]="['/', 'trips', 'add']" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+  <i class="fas fa-plus fa-sm text-white-50"></i>
+  Agregar
+</a> -->
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Fecha de inicio</th>
+      <th>Fecha de fin</th>
+      <th>Chofer</th>
+      <th>Autobus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trip of trips">
+      <td>{{trip.startDate | date: dateTimeFormat}}</td>
+      <td>{{trip.endDate | date: dateTimeFormat}}</td>
+      <td>{{trip.driver.name}}</td>
+      <td>{{busService.getBusDescription(trip.bus)}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(trip.id)">Editar</button>
+        <button class="btn btn-danger ml-2" (click)="delete(trip.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -9,7 +9,7 @@ namespace SmartBus.Website.Data.Entities
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public int DriverId { get; set; }
         public Driver Driver { get; set; }
         public int BusId { get; set; }

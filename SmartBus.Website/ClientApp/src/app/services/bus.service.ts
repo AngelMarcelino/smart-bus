@@ -26,4 +26,8 @@ export class BusService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
+
+  getBusDescription(bus: IBus) {
+    return bus.brand + ' ' + bus.model + ' ' + bus.id;
+  }
 }

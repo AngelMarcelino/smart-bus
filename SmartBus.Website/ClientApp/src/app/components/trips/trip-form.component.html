@@ -1,0 +1,41 @@
+<form [formGroup]="tripForm">
+  <div class="form-group">
+    <label>
+      Fecha de inicio
+    </label>
+    <input class="form-control" type="datetime-local" name="startDate" formControlName="startDate"/>
+  </div>
+  <div class="form-group">
+      <label>
+        Fecha de fin
+      </label>
+      <input class="form-control" type="datetime-local" name="endDate" formControlName="endDate"/>
+    </div>
+  <div class="form-group">
+    <label>
+      Autobus
+    </label>
+    <select class="form-control" formControlName="busId">
+      <option>
+        Seleccione autobus
+      </option>
+      <option *ngFor="let bus of buses" [value]="bus.id">
+        {{busService.getBusDescription(bus)}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>
+      Chofer
+    </label>
+    <select class="form-control" formControlName="driverId">
+      <option>
+        Seleccione chofer
+      </option>
+      <option *ngFor="let driver of drivers" [value]="driver.id">{{driver.name}}</option>
+    </select>
+    <input class="form-control" type="hidden" name="id" formControlName="id"/>
+  </div>
+  <button class="btn btn-primary"[disabled]="tripForm.invalid">Guardar</button>
+  <button class="btn btn-secondary ml-2" [routerLink]="['/trips']" routerLinkActive="router-link-active" >Cancelar</button>
+</form>

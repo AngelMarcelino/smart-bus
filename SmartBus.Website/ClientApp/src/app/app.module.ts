@@ -21,6 +21,9 @@ import { AuthInterceptorService } from './services/auth/auth-interceptor.service
 import { DriverListComponent } from './components/driver/driver-list.component';
 import { DriverFormComponent } from './components/driver/driver-form.component';
 import { DriverService } from './services/driver.service';
+import { TripService } from './services/trip.service';
+import { TripListComponent } from './components/trips/trip-list.component';
+import { TripFormComponent } from './components/trips/trip-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { DriverService } from './services/driver.service';
     MainViewNoAuthenticatedComponent,
     LoginComponent,
     DriverFormComponent,
-    DriverListComponent
+    DriverListComponent,
+    TripListComponent,
+    TripFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -90,6 +95,23 @@ import { DriverService } from './services/driver.service';
                 component: DriverFormComponent
               }
             ]
+          },
+          {
+            path: 'trips',
+            children: [
+              {
+                path: '',
+                component: TripListComponent
+              },
+              {
+                path: 'add',
+                component: TripFormComponent
+              },
+              {
+                path: 'edit/:id',
+                component: TripFormComponent
+              }
+            ]
           }
         ]
       }
@@ -109,7 +131,8 @@ import { DriverService } from './services/driver.service';
       useClass: AuthInterceptorService,
       multi: true
     },
-    DriverService
+    DriverService,
+    TripService
   ],
   bootstrap: [AppComponent]
 })
