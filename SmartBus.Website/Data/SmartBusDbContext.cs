@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data
 {
-    public class SmartBusDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
+    public class SmartBusDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public SmartBusDbContext(DbContextOptions<SmartBusDbContext> options) : base(options)
         {

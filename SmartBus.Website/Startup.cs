@@ -40,7 +40,17 @@ namespace SmartBus.Website
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+            services.AddIdentity<User, IdentityRole<int>>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredUniqueChars = 0;
+
+                options.SignIn.RequireConfirmedEmail = true;
+            })
                .AddEntityFrameworkStores<SmartBusDbContext>()
                .AddDefaultTokenProviders();
 
@@ -68,6 +78,7 @@ namespace SmartBus.Website
             services.AddScoped<Service<Driver>>();
             services.AddScoped<Service<Trip>>();
             services.AddScoped<Service<Route>>();
+            services.AddScoped<UserService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

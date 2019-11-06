@@ -10,7 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SmartBus.Website.Data.Entities;
 using SmartBus.Website.Models;
+using SmartBus.Website.Services;
+using SmartBus.Website.Utils;
 
 namespace SmartBus.Website.Controllers
 {
@@ -18,19 +21,22 @@ namespace SmartBus.Website.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser<int>> userManager;
-        private readonly SignInManager<IdentityUser<int>> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
+        private readonly UserService userService;
 
         public AccountController(
-            UserManager<IdentityUser<int>> userManager,
-            SignInManager<IdentityUser<int>> signInManager,
-            IConfiguration configuration
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IConfiguration configuration,
+            UserService userService
         )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
+            this.userService = userService;
         }
 
         [HttpPost("[action]")]
@@ -49,32 +55,38 @@ namespace SmartBus.Website.Controllers
                     .SingleOrDefault(r => r.Email == model.Email);
                 return GenerateJwtToken(model.Email, appUser);
             }
+            if (result.IsNotAllowed)
+            {
+                return "";
+            }
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
         }
 
         [HttpPost("[action]")] 
-        public async Task<string> Register([FromBody] RegisterModel register)
+        public async Task<IActionResult> Register([FromBody] RegisterModel register)
         {
-            var user = new IdentityUser<int>
-            {
-                UserName = register.Email,
-                Email = register.Email
-            };
+            var user = await this.userService.CreateUserFromRegisterModelAsync(register);
             var result = await userManager.CreateAsync(user, register.Password);
             if (result.Succeeded)
             {
-                return await this.Login(new LoginModel()
+                var dbUser = await userManager.FindByNameAsync(register.Email);
+                var roleAddResult = await userManager.AddToRoleAsync(dbUser, AvailableRoles.User);
+                if ( roleAddResult.Succeeded)
                 {
-                    Email = register.Email,
-                    Password = register.Password
-                });
+                    return Ok();
+                } 
+                else
+                {
+                    await userManager.DeleteAsync(user);
+                }
             }
             throw new ApplicationException("UNKNOWN_ERROR");
         }
 
+
         private string GenerateJwtToken(
             string email,
-            IdentityUser<int> user
+            User user
         )
         {
             

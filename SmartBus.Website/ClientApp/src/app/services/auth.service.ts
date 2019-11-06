@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginModel } from '../models/login-model';
+import { RegisterModel } from '../models/register-model';
+import { VerificationEmail } from '../models/verification-email-model';
 
 export const AuthTokenKey = 'AuthToken';
 
@@ -32,5 +34,13 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  register(registerModel: RegisterModel) {
+    return this.http.post('/api/Account/Register', registerModel);
+  }
+
+  sendVerificationEmail(verificationEmail: VerificationEmail) {
+    return this.http.post('(/api/Account/SendVerificationEmail', verificationEmail);
   }
 }

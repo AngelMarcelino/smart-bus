@@ -29,6 +29,8 @@ export class LoginComponent {
           if (token) {
             console.log(token);
             this.router.navigate(['']);
+          } else if (token === '') {
+            this.router.navigate(['/no-auth', 'validate-email', 'resend']);
           } else {
             this.showValidationError = true;
           }

@@ -15,5 +15,7 @@ namespace SmartBus.Website.Models
         [Required]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
+        public string LastName { get; set; }
+        public string Name { get; set; }
     }
 }

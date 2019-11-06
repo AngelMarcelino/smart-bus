@@ -27,6 +27,8 @@ import { TripFormComponent } from './components/trips/trip-form.component';
 import { RouteFormComponent } from './components/routes/route-form.component';
 import { RouteListComponent } from './components/routes/route-list.component';
 import { RouteService } from './services/route.service';
+import { RegisterComponent } from './components/register/register.component';
+import { ValidateEmailComponent } from './components/register/validate-email.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { RouteService } from './services/route.service';
     TripListComponent,
     TripFormComponent,
     RouteFormComponent,
-    RouteListComponent
+    RouteListComponent,
+    RegisterComponent,
+    ValidateEmailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,6 +62,18 @@ import { RouteService } from './services/route.service';
           {
             path: 'login',
             component: LoginComponent
+          },
+          {
+            path: 'register',
+            component: RegisterComponent
+          },
+          {
+            path: 'validate-email',
+            component: ValidateEmailComponent
+          },
+          {
+            path: 'validate-email/:resend',
+            component: ValidateEmailComponent
           }
         ]
       },
