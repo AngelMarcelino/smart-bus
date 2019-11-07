@@ -1,0 +1,22 @@
+<h1>Usuarios</h1>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Correo</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(user.id)">Editar</button>
+        <button class="btn btn-danger ml-2" (click)="delete(user.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

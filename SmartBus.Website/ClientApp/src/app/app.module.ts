@@ -31,6 +31,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { ValidateEmailComponent } from './components/register/validate-email.component';
 import { ValidationErrorComponent } from './components/register/validation-error.component';
 import { ValidationSucceedComponent } from './components/register/validation-succeed.component';
+import { UserFormComponent } from './components/users/user-form.component';
+import { UserListComponent } from './components/users/user-list.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { ValidationSucceedComponent } from './components/register/validation-suc
     RegisterComponent,
     ValidateEmailComponent,
     ValidationErrorComponent,
-    ValidationSucceedComponent
+    ValidationSucceedComponent,
+    UserFormComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -163,6 +168,23 @@ import { ValidationSucceedComponent } from './components/register/validation-suc
               }
             ]
           },
+          {
+            path: 'users',
+            children: [
+              {
+                path: '',
+                component: UserListComponent
+              },
+              {
+                path: 'add',
+                component: UserFormComponent
+              },
+              {
+                path: 'edit/:id',
+                component: UserFormComponent
+              }
+            ]
+          }
         ]
       }
     ])
@@ -183,7 +205,8 @@ import { ValidationSucceedComponent } from './components/register/validation-suc
     },
     DriverService,
     TripService,
-    RouteService
+    RouteService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

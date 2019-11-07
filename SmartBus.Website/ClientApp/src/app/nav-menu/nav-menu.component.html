@@ -51,22 +51,22 @@
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" >
+  <li class="nav-item" routerLinkActive="active">
+    <a class="nav-link collapsed" [routerLink]="['/users']" >
       <i class="fas fa-fw fa-users"></i>
       <span>Usuarios</span>
     </a>
   </li>
 
   <!-- Nav Item - Charts -->
-  <li class="nav-item">
+  <li class="nav-item" routerLinkActive="active">
     <a class="nav-link" [routerLink]="['/trips']">
       <i class="fas fa-fw fa-plane"></i>
       <span>Viajes</span></a>
   </li>
 
   <!-- Nav Item - Tables -->
-  <li class="nav-item">
+  <li class="nav-item" routerLinkActive="active">
     <a class="nav-link" [routerLink]="['/routes']">
       <i class="fas fa-fw fa-route"></i>
       <span>Rutas</span></a>
