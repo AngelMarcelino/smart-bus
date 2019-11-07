@@ -25,18 +25,21 @@ namespace SmartBus.Website.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
         private readonly UserService userService;
+        private readonly IEmailSender emailSender;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IConfiguration configuration,
-            UserService userService
+            UserService userService,
+            IEmailSender emailSender
         )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
             this.userService = userService;
+            this.emailSender = emailSender;
         }
 
         [HttpPost("[action]")]
@@ -73,6 +76,8 @@ namespace SmartBus.Website.Controllers
                 var roleAddResult = await userManager.AddToRoleAsync(dbUser, AvailableRoles.User);
                 if ( roleAddResult.Succeeded)
                 {
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(dbUser);
+                    this.emailSender.SendEmail("kamikase1998@gmail.com", "test", "this is a test");
                     return Ok();
                 } 
                 else

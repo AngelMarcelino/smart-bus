@@ -13,6 +13,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using SmartBus.Website.Data;
 using SmartBus.Website.Data.Entities;
 using SmartBus.Website.Services;
+using SmartBus.Website.Utils;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -86,6 +87,7 @@ namespace SmartBus.Website
             services.AddScoped<Service<Trip>>();
             services.AddScoped<Service<Route>>();
             services.AddScoped<UserService>();
+            services.AddScoped<IEmailSender, EmailSender>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
