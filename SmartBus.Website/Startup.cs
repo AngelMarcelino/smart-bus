@@ -57,7 +57,7 @@ namespace SmartBus.Website
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredUniqueChars = 0;
 
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             })
                .AddEntityFrameworkStores<SmartBusDbContext>()
                .AddDefaultTokenProviders();

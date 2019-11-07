@@ -30,7 +30,7 @@ export class ValidateEmailComponent {
       email: this.formGroup.value['email']
     })
       .subscribe(e => {
-
+        this.isResend = false;
       });
   }
 }

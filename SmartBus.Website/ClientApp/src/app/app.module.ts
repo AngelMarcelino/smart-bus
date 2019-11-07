@@ -29,6 +29,8 @@ import { RouteListComponent } from './components/routes/route-list.component';
 import { RouteService } from './services/route.service';
 import { RegisterComponent } from './components/register/register.component';
 import { ValidateEmailComponent } from './components/register/validate-email.component';
+import { ValidationErrorComponent } from './components/register/validation-error.component';
+import { ValidationSucceedComponent } from './components/register/validation-succeed.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ValidateEmailComponent } from './components/register/validate-email.com
     RouteFormComponent,
     RouteListComponent,
     RegisterComponent,
-    ValidateEmailComponent
+    ValidateEmailComponent,
+    ValidationErrorComponent,
+    ValidationSucceedComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -74,6 +78,14 @@ import { ValidateEmailComponent } from './components/register/validate-email.com
           {
             path: 'validate-email/:resend',
             component: ValidateEmailComponent
+          },
+          {
+            path: 'validation-error',
+            component: ValidationErrorComponent
+          },
+          {
+            path: 'validation-succeed',
+            component: ValidationSucceedComponent
           }
         ]
       },
@@ -150,7 +162,7 @@ import { ValidateEmailComponent } from './components/register/validate-email.com
                 component: RouteFormComponent
               }
             ]
-          }
+          },
         ]
       }
     ])

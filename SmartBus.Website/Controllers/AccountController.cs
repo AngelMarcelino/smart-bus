@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -76,16 +77,53 @@ namespace SmartBus.Website.Controllers
                 var roleAddResult = await userManager.AddToRoleAsync(dbUser, AvailableRoles.User);
                 if ( roleAddResult.Succeeded)
                 {
-                    var token = await userManager.GenerateEmailConfirmationTokenAsync(dbUser);
-                    this.emailSender.SendEmail("kamikase1998@gmail.com", "test", "this is a test");
-                    return Ok();
+                    return await SendConfirmationEmail(register.Email);
                 } 
                 else
                 {
                     await userManager.DeleteAsync(user);
                 }
+            } else
+            {
+                if (result.Errors.Select(e => e.Code).Contains(nameof(IdentityErrorDescriber.DuplicateUserName))) {
+                    return BadRequest("Duplicate");
+                }
             }
             throw new ApplicationException("UNKNOWN_ERROR");
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendConfirmationEmail([FromQuery] string email)
+        {
+            var dbUser = await userManager.FindByEmailAsync(email);
+            if (dbUser != null)
+            {
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(dbUser);
+                var absoluteUri = configuration["AbsoluteUri"];
+                var confirmUri = absoluteUri + "/api/Account/" + nameof(ConfirmEmail) + "?token=" + HttpUtility.UrlEncode(token) + "&email=" + email;
+                this.emailSender.SendEmail(email, "Confirmar tu correo", "<h1>Bienvenido a Smart Bus </h1>" +
+                    "<p>Para confirmar  tu correo has clic en el siguiente enlace: <a href=\"" + confirmUri + "\">Confirmar</a></p>");
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var result = await userManager.ConfirmEmailAsync(user, token);
+                if (result.Succeeded)
+                {
+                    return Redirect("/no-auth/validation-succeed");
+                } else 
+                {
+                    return Redirect("/no-auth/validation-error");
+                }
+            }
+            return Redirect("/no-auth/validation-error");
         }
 
 
@@ -94,14 +132,12 @@ namespace SmartBus.Website.Controllers
             User user
         )
         {
-            
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, user.Id.ToString())
             };
-
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(configuration["JwtConfiguration:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

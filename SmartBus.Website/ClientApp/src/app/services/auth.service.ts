@@ -41,6 +41,10 @@ export class AuthService {
   }
 
   sendVerificationEmail(verificationEmail: VerificationEmail) {
-    return this.http.post('(/api/Account/SendVerificationEmail', verificationEmail);
+    return this.http.post('/api/Account/SendConfirmationEmail', null, {
+      params: {
+        'email': verificationEmail.email
+      }
+    });
   }
 }

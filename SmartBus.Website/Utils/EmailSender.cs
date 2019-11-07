@@ -16,17 +16,16 @@ namespace SmartBus.Website.Utils
          
         public void SendEmail(string to, string subject, string body)
         {
-            SmtpClient client = new SmtpClient("mysmtpserver");
+            SmtpClient client = new SmtpClient("smtp.live.com", 587);
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("ajedrez_a1@hotmail.com", "t-aj-012");
-            client.Port = 25;
-            client.Host = "smtp.live.com";
+            client.Credentials = new NetworkCredential("agemarcelino@hotmail.com", "AnGeL199898");
             client.EnableSsl = true;
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("smart@bus.com");
+            mailMessage.From = new MailAddress("agemarcelino@hotmail.com");
             mailMessage.To.Add(to);
             mailMessage.Body = body;
             mailMessage.Subject = subject;
+            mailMessage.IsBodyHtml = true;
             client.Send(mailMessage);
         }
     }

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  validationMessage: string;
   constructor(
     formBuilder: FormBuilder,
     private authService: AuthService,
@@ -26,6 +27,14 @@ export class RegisterComponent {
 
   onFormSubmit() {
     this.authService.register(<RegisterModel> this.registerForm.value)
-      .subscribe(e => this.router.navigate(['/no-auth', 'validate-email']));
+      .subscribe({
+        next: e => this.router.navigate(['/no-auth', 'validate-email']),
+        error: error => {
+          if (error.error === 'Duplicate') {
+            this.validationMessage = 'Ya existe un usuario con este correo';
+          }
+          console.log(error);
+        }
+      });
   }
 }
