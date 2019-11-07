@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using SmartBus.Website.Data;
 using SmartBus.Website.Data.Entities;
 using SmartBus.Website.Services;
@@ -38,8 +39,14 @@ namespace SmartBus.Website
             });
             services.AddDbContext<SmartBusDbContext>(option =>
             {
-                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                option.UseMySql(Configuration.GetConnectionString("DefaultConnection"), mySqlOptions =>
+                {
+                    mySqlOptions.ServerVersion(new Version(10, 4, 6), ServerType.MariaDb); // replace with your Server Version and Type
+                });
             });
+
+
+
             services.AddIdentity<User, IdentityRole<int>>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -49,7 +56,7 @@ namespace SmartBus.Website
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredUniqueChars = 0;
 
-                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
             })
                .AddEntityFrameworkStores<SmartBusDbContext>()
                .AddDefaultTokenProviders();
@@ -84,6 +91,7 @@ namespace SmartBus.Website
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
