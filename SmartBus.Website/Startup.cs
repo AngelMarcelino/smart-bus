@@ -83,7 +83,7 @@ namespace SmartBus.Website
             });
             
             services.AddScoped<Service<Bus>>();
-            services.AddScoped<Service<Driver>>();
+            services.AddScoped<DriverService>();
             services.AddScoped<Service<Trip>>();
             services.AddScoped<Service<Route>>();
             services.AddScoped<UserService>();

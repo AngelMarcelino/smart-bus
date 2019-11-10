@@ -17,7 +17,7 @@ namespace SmartBus.Website.Services
             this.dbContext = dbContext;
         }
 
-        public async Task AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             this.dbContext.Add(entity);
             await this.dbContext.SaveChangesAsync();
