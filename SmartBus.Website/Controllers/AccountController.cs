@@ -57,7 +57,7 @@ namespace SmartBus.Website.Controllers
             {
                 var appUser = userManager.Users
                     .SingleOrDefault(r => r.Email == model.Email);
-                return GenerateJwtToken(model.Email, appUser);
+                return await GenerateJwtToken(model.Email, appUser);
             }
             if (result.IsNotAllowed)
             {
@@ -127,14 +127,16 @@ namespace SmartBus.Website.Controllers
         }
 
 
-        private string GenerateJwtToken(
+        private async Task<string> GenerateJwtToken(
             string email,
             User user
         )
         {
+            var role = (await userManager.GetRolesAsync(user)).First();
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role),   
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, user.Id.ToString())
             };
