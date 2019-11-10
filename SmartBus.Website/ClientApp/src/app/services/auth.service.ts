@@ -26,16 +26,18 @@ export class AuthService {
     })
     .pipe(tap(token => {
       localStorage.setItem(AuthTokenKey, token);
-      this.loadSession(token)
+      this.loadSession(token);
     }));
   }
 
   private loadSession(token) {
-    const tokenParsed = this.jwtService.parseJwt(token);
-    this.session = {
-      role: tokenParsed['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
-      email: tokenParsed['sub']
-    };
+    if (token) {
+      const tokenParsed = this.jwtService.parseJwt(token);
+      this.session = {
+        role: tokenParsed['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+        email: tokenParsed['sub']
+      };
+    }
   }
 
   clearToken() {
