@@ -10,10 +10,11 @@ namespace SmartBus.Website.Data.Entities
     {
         public string Name { get; set; }
         public string LastName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public decimal Balance { get; set; }
-        public int UserCategoryId { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public decimal? Balance { get; set; }
+        public int? UserCategoryId { get; set; }
         public UserCategory UserCategory { get; set; }
         public ICollection<Passage> Passages { get; set; }
+        public Driver Driver { get; set; }
     }
 }

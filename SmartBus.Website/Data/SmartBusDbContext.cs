@@ -27,6 +27,11 @@ namespace SmartBus.Website.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Driver>()
+                .HasOne(e => e.User)
+                .WithOne(e => e.Driver)
+                .HasForeignKey<Driver>(e => e.UserId)
+                .IsRequired(true);
             base.OnModelCreating(modelBuilder);
         }
     }

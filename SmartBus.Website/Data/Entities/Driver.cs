@@ -10,9 +10,10 @@ namespace SmartBus.Website.Data.Entities
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
         public DateTime RegisterDate { get; set; }
         public string Phone { get; set; }
         public ICollection<Trip> Trips { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
