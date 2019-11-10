@@ -24,6 +24,8 @@ export class DriverFormComponent {
             .subscribe(driver => {
               this.driverForm.setValue({
                 name: driver.name,
+                lastName: driver.lastName,
+                email: driver.email,
                 id: driver.id,
                 registerDate: (<string>driver.registerDate || '').split('T')[0],
                 phone: driver.phone
@@ -34,6 +36,8 @@ export class DriverFormComponent {
   }
   driverForm = this.fb.group({
     name: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
     phone: ['', Validators.required],
     registerDate: ['', Validators.required],
     id: [0]
@@ -42,6 +46,8 @@ export class DriverFormComponent {
     this.driver = {
       id: this.driverForm.controls['id'].value || 0,
       name: this.driverForm.controls['name'].value,
+      lastName: this.driverForm.controls['lastName'].value,
+      email: this.driverForm.controls['email'].value,
       phone: this.driverForm.controls['phone'].value,
       registerDate: this.driverForm.controls['registerDate'].value
     };
