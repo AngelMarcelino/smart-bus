@@ -34,6 +34,10 @@ import { ValidationSucceedComponent } from './components/register/validation-suc
 import { UserFormComponent } from './components/users/user-form.component';
 import { UserListComponent } from './components/users/user-list.component';
 import { UserService } from './services/user.service';
+import { JwtService } from './services/jwt.service';
+import { NavUserComponent } from './nav-menu/nav-user/nav-user.component';
+import { NavDriverComponent } from './nav-menu/nav-driver/nav-driver.component';
+import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { UserService } from './services/user.service';
     ValidationErrorComponent,
     ValidationSucceedComponent,
     UserFormComponent,
-    UserListComponent
+    UserListComponent,
+    NavAdminComponent,
+    NavUserComponent,
+    NavDriverComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -206,7 +213,8 @@ import { UserService } from './services/user.service';
     DriverService,
     TripService,
     RouteService,
-    UserService
+    UserService,
+    JwtService
   ],
   bootstrap: [AppComponent]
 })
