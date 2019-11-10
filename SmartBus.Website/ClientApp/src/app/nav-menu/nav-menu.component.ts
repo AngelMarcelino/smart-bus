@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
     private router: Router
     ) {
 
