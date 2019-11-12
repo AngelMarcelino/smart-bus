@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-8 form-group">
+      <label>Choferes</label>
+      <select name="selectedElementId" [(ngModel)]="list.selectedElementId" class="form-control">
+        <option>Selecciona</option>
+        <option [value]="driver.id" *ngFor="let driver of list.displayList">{{driver.name}} {{driver.lastName}}</option>
+      </select>
+    </div>
+    <div class="col-4 form-group">
+      <button type="button" class="btn btn-info" (click)="list.add()">Agregar</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let driver of list.elements">
+            <td>{{driver.name}} {{driver.lastName}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="list.delete(driver.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

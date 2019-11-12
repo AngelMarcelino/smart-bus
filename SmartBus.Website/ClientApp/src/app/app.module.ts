@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { BusFormComponent } from './components/bus/bus-form.component';
@@ -43,6 +42,8 @@ import { NoAuthRoutes } from './routes/no-auth-routes';
 import { MyTripsComponent } from './components/my-trips/my-trips.component';
 import { DriverRoutes } from './routes/driver-routes';
 import { UserGuardService, AdminGuardService, DriverGuardService } from './services/auth/role-guards.services';
+import { BusesListEditorComponent } from './components/list-editors/buses-list-editor.component';
+import { DriversListEditorComponent } from './components/list-editors/drivers-list-editor.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,9 @@ import { UserGuardService, AdminGuardService, DriverGuardService } from './servi
     NavAdminComponent,
     NavUserComponent,
     NavDriverComponent,
-    MyTripsComponent
+    MyTripsComponent,
+    BusesListEditorComponent,
+    DriversListEditorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

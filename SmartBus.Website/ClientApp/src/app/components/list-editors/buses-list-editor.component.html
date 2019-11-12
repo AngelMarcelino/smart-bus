@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-8 form-group">
+    <label>Bus</label>
+    <select name="selectedElementId" [(ngModel)]="list.selectedElementId" class="form-control">
+      <option>Selecciona</option>
+      <option [value]="bus.id" *ngFor="let bus of list.displayList">{{bus.brand}} {{bus.model}}</option>
+    </select>
+  </div>
+  <div class="col-4 form-group">
+    <button type="button" class="btn btn-info" (click)="list.add()">Agregar</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bus of list.elements">
+          <td>{{bus.brand}}</td>
+          <td>{{bus.model}}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="list.delete(bus.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

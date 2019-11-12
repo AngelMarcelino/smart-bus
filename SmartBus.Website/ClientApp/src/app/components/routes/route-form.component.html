@@ -24,6 +24,18 @@
     <input class="form-control" type="text" name="intervalInMinutes" formControlName="intervalInMinutes"/>
     <input class="form-control" type="hidden" name="id" formControlName="id"/>
   </div>
+  <div class="row">
+    <div class="col-6">
+        <app-buses-list-editor [displayList]="displayBuses" [(buses)]="buses">
+          </app-buses-list-editor>
+    </div>
+    <div class="col-6">
+        <app-drivers-list-editor [displayList]="displayDrivers" [(driver)]="drivers">
+          </app-drivers-list-editor>
+    </div>
+  </div>
+
+
   <button class="btn btn-primary"[disabled]="routeForm.invalid">Guardar</button>
   <button class="btn btn-secondary ml-2" [routerLink]="['/routes']" routerLinkActive="router-link-active" >Cancelar</button>
 </form>

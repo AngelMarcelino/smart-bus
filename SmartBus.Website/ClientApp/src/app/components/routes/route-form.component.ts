@@ -4,19 +4,29 @@ import { RouteService } from 'src/app/services/route.service';
 import { IRoute } from 'src/app/models/route';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IBus } from 'src/app/models/bus';
+import { BusService } from 'src/app/services/bus.service';
+import { DriverService } from 'src/app/services/driver.service';
+import { IDriver } from 'src/app/models/driver';
 
 @Component({
   selector: 'app-route-form',
   templateUrl: './route-form.component.html'
 })
 export class RouteFormComponent {
+  buses: IBus[] = [];
+  displayBuses: IBus[] = [];
+  drivers: IDriver[] = [];
+  displayDrivers: IDriver[] = [];
   route: IRoute;
   private isEdit = false;
   constructor(
     private fb: FormBuilder,
     private routeService: RouteService,
     private router: Router,
-    activatedRoute: ActivatedRoute) {
+    activatedRoute: ActivatedRoute,
+    driverService: DriverService,
+    busService: BusService) {
       activatedRoute.params.subscribe(data => {
         if (data.id) {
           this.isEdit = true;
@@ -32,6 +42,14 @@ export class RouteFormComponent {
             });
         }
       });
+      busService.getAll()
+        .subscribe(e => {
+          this.displayBuses = e;
+        });
+      driverService.getAll()
+        .subscribe(e => {
+          this.displayDrivers = e;
+        });
   }
   routeForm = this.fb.group({
     name: ['', Validators.required],
