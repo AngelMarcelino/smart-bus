@@ -18,7 +18,7 @@ export class GuardNoAuthService implements CanActivate {
     return this.activateFunctionality()
       .pipe(tap(ableToContinue => {
         if (!ableToContinue) {
-          this.router.navigate(['']);
+          this.router.navigate(['/' + this.authService.session.role.toLowerCase()]);
         }
       }));
   }

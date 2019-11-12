@@ -18,7 +18,10 @@ export class AuthService {
     this.loadSession(token);
   }
 
-  session: ISession;
+  session: ISession = {
+    email: '',
+    role: 'no-auth'
+  };
 
   login(loginModel: LoginModel): Observable<string> {
     return this.http.post('/api/Account/Login', loginModel, {

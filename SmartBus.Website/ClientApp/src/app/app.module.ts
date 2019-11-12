@@ -38,6 +38,11 @@ import { JwtService } from './services/jwt.service';
 import { NavUserComponent } from './nav-menu/nav-user/nav-user.component';
 import { NavDriverComponent } from './nav-menu/nav-driver/nav-driver.component';
 import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
+import { AdminRoutes } from './routes/admin-routes';
+import { NoAuthRoutes } from './routes/no-auth-routes';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { DriverRoutes } from './routes/driver-routes';
+import { UserGuardService, AdminGuardService, DriverGuardService } from './services/auth/role-guards.services';
 
 @NgModule({
   declarations: [
@@ -62,7 +67,8 @@ import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
     UserListComponent,
     NavAdminComponent,
     NavUserComponent,
-    NavDriverComponent
+    NavDriverComponent,
+    MyTripsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -74,123 +80,28 @@ import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
         canActivate: [GuardNoAuthService],
         path: 'no-auth',
         component: MainViewNoAuthenticatedComponent,
-        children: [
-          {
-            path: 'login',
-            component: LoginComponent
-          },
-          {
-            path: 'register',
-            component: RegisterComponent
-          },
-          {
-            path: 'validate-email',
-            component: ValidateEmailComponent
-          },
-          {
-            path: 'validate-email/:resend',
-            component: ValidateEmailComponent
-          },
-          {
-            path: 'validation-error',
-            component: ValidationErrorComponent
-          },
-          {
-            path: 'validation-succeed',
-            component: ValidationSucceedComponent
-          }
-        ]
+        children: NoAuthRoutes
       },
       {
         path: '',
         canActivate: [GuardAuthService],
         component: MainViewAuthenticateComponent,
         children: [
-          { path: '', redirectTo: 'autobuses', pathMatch: 'full' },
+          {path: 'admin', redirectTo: ''},
           {
-            path: 'autobuses',
-            children: [
-              {
-                path: '',
-                component: BusListComponent
-              },
-              {
-                path: 'add',
-                component: BusFormComponent
-              },
-              {
-                path: 'edit/:id',
-                component: BusFormComponent
-              }
-            ]
+            path: '',
+            children: AdminRoutes,
+            canActivate: [AdminGuardService],
           },
           {
-            path: 'drivers',
-            children: [
-              {
-                path: '',
-                component: DriverListComponent
-              },
-              {
-                path: 'add',
-                component: DriverFormComponent
-              },
-              {
-                path: 'edit/:id',
-                component: DriverFormComponent
-              }
-            ]
+            path: 'driver',
+            canActivate: [DriverGuardService],
+            children: DriverRoutes
           },
           {
-            path: 'trips',
-            children: [
-              {
-                path: '',
-                component: TripListComponent
-              },
-              {
-                path: 'add',
-                component: TripFormComponent
-              },
-              {
-                path: 'edit/:id',
-                component: TripFormComponent
-              }
-            ]
-          },
-          {
-            path: 'routes',
-            children: [
-              {
-                path: '',
-                component: RouteListComponent
-              },
-              {
-                path: 'add',
-                component: RouteFormComponent
-              },
-              {
-                path: 'edit/:id',
-                component: RouteFormComponent
-              }
-            ]
-          },
-          {
-            path: 'users',
-            children: [
-              {
-                path: '',
-                component: UserListComponent
-              },
-              {
-                path: 'add',
-                component: UserFormComponent
-              },
-              {
-                path: 'edit/:id',
-                component: UserFormComponent
-              }
-            ]
+            path: 'user',
+            canActivate: [UserGuardService],
+            children: AdminRoutes
           }
         ]
       }
@@ -200,7 +111,7 @@ import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
     BusService,
     GuardAuthService,
     GuardNoAuthService,
-    AuthService,
+    JwtService,
     {
       provide: UiNotificationsService,
       useClass: AlertUINotificationsService
@@ -213,8 +124,11 @@ import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
     DriverService,
     TripService,
     RouteService,
+    AuthService,
     UserService,
-    JwtService
+    UserGuardService,
+    AdminGuardService,
+    DriverGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -30,6 +30,7 @@ export class BusFormComponent {
   busForm = this.fb.group({
     brand: ['', Validators.required],
     model: ['', Validators.required],
+    availablePlaces: ['', Validators.required],
     id: [0]
   });
   onSubmit() {
@@ -37,6 +38,7 @@ export class BusFormComponent {
       id: this.busForm.controls['id'].value || 0,
       brand: this.busForm.controls['brand'].value,
       model: this.busForm.controls['model'].value,
+      availablePlaces: this.busForm['availablePlaces'].value
     };
     this.save();
   }

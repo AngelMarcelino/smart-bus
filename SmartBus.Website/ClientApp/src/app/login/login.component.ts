@@ -28,7 +28,7 @@ export class LoginComponent {
         next: token => {
           if (token) {
             console.log(token);
-            this.router.navigate(['']);
+            this.router.navigate(['/' + this.authService.session.role.toLowerCase()]);
           } else if (token === '') {
             this.router.navigate(['/no-auth', 'validate-email', 'resend']);
           } else {
