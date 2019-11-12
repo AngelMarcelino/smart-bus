@@ -13,7 +13,7 @@ export class ListAdministrator<T extends WithId> {
     this.display = value;
   }
   get displayList(): T[] {
-    return this.display;
+    return this.display.filter(e => !this.elements.some(elem => elem.id === e.id));
   }
 
   set elements(value: T[]) {
@@ -29,6 +29,7 @@ export class ListAdministrator<T extends WithId> {
   delete(elementId: number) {
     this.elements = this.elements.filter(e => e.id !== elementId);
     this.elementsChanges.emit(this.elements);
+
   }
 
   add() {
