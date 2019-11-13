@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginModel } from '../models/login-model';
-import { AuthService } from '../services/auth.service';
-import { UiNotificationsService } from '../services/ui-notifications/ui-notifications.service';
+import { LoginModel } from '../../models/login-model';
+import { AuthService } from '../../services/auth.service';
+import { UiNotificationsService } from '../../services/ui-notifications/ui-notifications.service';
 
 @Component({
   selector: 'app-login',

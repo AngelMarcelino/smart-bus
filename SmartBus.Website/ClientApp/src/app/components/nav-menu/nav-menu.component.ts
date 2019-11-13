@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -25,6 +25,6 @@ export class NavMenuComponent {
 
   logOut() {
     this.authService.clearToken();
-    this.router.navigate(['/no-auth', 'login'])
+    this.router.navigate(['/no-auth', 'login']);
   }
 }

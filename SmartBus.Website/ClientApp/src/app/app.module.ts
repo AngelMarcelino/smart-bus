@@ -4,13 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { BusFormComponent } from './components/bus/bus-form.component';
 import { BusService } from './services/bus.service';
 import { BusListComponent } from './components/bus/bus-list.component';
 import { MainViewAuthenticateComponent } from './components/main-view-authenticated/main-view-authenticated.component';
 import { MainViewNoAuthenticatedComponent } from './components/main-view-no-authenticated/main-view-no-authenticated.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { GuardAuthService } from './services/auth/guard-auth.service';
 import { GuardNoAuthService } from './services/auth/guard-no-auth.service';
 import { AuthService } from './services/auth.service';
@@ -34,9 +33,6 @@ import { UserFormComponent } from './components/users/user-form.component';
 import { UserListComponent } from './components/users/user-list.component';
 import { UserService } from './services/user.service';
 import { JwtService } from './services/jwt.service';
-import { NavUserComponent } from './nav-menu/nav-user/nav-user.component';
-import { NavDriverComponent } from './nav-menu/nav-driver/nav-driver.component';
-import { NavAdminComponent } from './nav-menu/nav-admin/nav-admin.component';
 import { AdminRoutes } from './routes/admin-routes';
 import { NoAuthRoutes } from './routes/no-auth-routes';
 import { MyTripsComponent } from './components/my-trips/my-trips.component';
@@ -44,6 +40,10 @@ import { DriverRoutes } from './routes/driver-routes';
 import { UserGuardService, AdminGuardService, DriverGuardService } from './services/auth/role-guards.services';
 import { BusesListEditorComponent } from './components/list-editors/buses-list-editor.component';
 import { DriversListEditorComponent } from './components/list-editors/drivers-list-editor.component';
+import { NavAdminComponent } from './components/nav-menu/nav-admin/nav-admin.component';
+import { NavUserComponent } from './components/nav-menu/nav-user/nav-user.component';
+import { NavDriverComponent } from './components/nav-menu/nav-driver/nav-driver.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
