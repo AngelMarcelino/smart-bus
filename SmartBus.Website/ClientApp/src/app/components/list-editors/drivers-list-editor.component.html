@@ -3,7 +3,7 @@
       <label>Choferes</label>
       <select name="selectedElementId" [(ngModel)]="list.selectedElementId" class="form-control">
         <option>Selecciona</option>
-        <option [value]="driver.id" *ngFor="let driver of list.displayList">{{driver.name}} {{driver.lastName}}</option>
+        <option [value]="driver.id" *ngFor="let driver of list.displayList">{{driver.user.name}} {{driver.user.lastName}}</option>
       </select>
     </div>
     <div class="col-4 form-group">
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let driver of list.elements">
-            <td>{{driver.name}} {{driver.lastName}}</td>
+            <td>{{driver.user.name}} {{driver.user.lastName}}</td>
             <td>
               <button type="button" class="btn btn-danger" (click)="list.delete(driver.id)">Eliminar</button>
             </td>

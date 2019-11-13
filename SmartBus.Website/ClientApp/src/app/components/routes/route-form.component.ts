@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RouteService } from 'src/app/services/route.service';
-import { IRoute } from 'src/app/models/route';
+import { IRoute, IDriverFromDb } from 'src/app/models/route';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IBus } from 'src/app/models/bus';
@@ -16,8 +16,8 @@ import { IDriver } from 'src/app/models/driver';
 export class RouteFormComponent {
   buses: IBus[] = [];
   displayBuses: IBus[] = [];
-  drivers: IDriver[] = [];
-  displayDrivers: IDriver[] = [];
+  drivers: IDriverFromDb[] = [];
+  displayDrivers: IDriverFromDb[] = [];
   route: IRoute;
   private isEdit = false;
   constructor(
@@ -32,6 +32,8 @@ export class RouteFormComponent {
           this.isEdit = true;
           this.routeService.get(data.id)
             .subscribe(route => {
+              this.buses = [...(route.buses || [])];
+              this.drivers = [...(route.drivers || [])];
               this.routeForm.setValue({
                 name: route.name,
                 id: route.id,
@@ -47,8 +49,21 @@ export class RouteFormComponent {
           this.displayBuses = e;
         });
       driverService.getAll()
-        .subscribe(e => {
-          this.displayDrivers = e;
+        .subscribe(f => {
+          this.displayDrivers = f.map(e => <IDriverFromDb>({
+            id: e.id,
+            phone: e.phone,
+            registerDate: e.registerDate,
+            routeId: e.routeId,
+            user: {
+              balance: 0,
+              email: '',
+              id: 0,
+              lastName: e.lastName,
+              name: e.name
+            },
+            userId: 0
+          }));
         });
   }
   routeForm = this.fb.group({
@@ -64,7 +79,9 @@ export class RouteFormComponent {
       name: this.routeForm.controls['name'].value,
       lastLeavingHour: this.routeForm.controls['lastLeavingHour'].value,
       firstLeavingHour: this.routeForm.controls['firstLeavingHour'].value,
-      intervalInMinutes: this.routeForm.controls['intervalInMinutes'].value
+      intervalInMinutes: this.routeForm.controls['intervalInMinutes'].value,
+      buses: [...this.buses],
+      drivers: [...this.drivers]
     };
     this.save();
   }

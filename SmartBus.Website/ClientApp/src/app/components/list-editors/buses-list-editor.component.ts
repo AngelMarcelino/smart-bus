@@ -12,7 +12,7 @@ export class BusesListEditorComponent {
   list: ListAdministrator<IBus>;
   constructor() {
     this.list = new ListAdministrator();
-    this.busesChanges = this.list.elementsChanges;
+    this.busesChange = this.list.elementsChanges;
   }
   @Input()
   set displayList(value: IBus[]) {
@@ -24,5 +24,5 @@ export class BusesListEditorComponent {
     this.list.elements = value;
   }
   @Output()
-  busesChanges: EventEmitter<IBus[]>;
+  busesChange: EventEmitter<IBus[]>;
 }

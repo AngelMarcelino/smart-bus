@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartBus.Website.Data.Entities;
+using SmartBus.Website.Models;
 using SmartBus.Website.Services;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace SmartRoute.Website.Controllers
 
     //77301499
     {
-        private readonly Service<Route> RouteService;
+        private readonly RouteService RouteService;
 
-        public RouteController(Service<Route> RouteService)
+        public RouteController(RouteService RouteService)
         {
             this.RouteService = RouteService;
         }
@@ -26,7 +27,7 @@ namespace SmartRoute.Website.Controllers
         [HttpGet("{id}")]
         public Task<Route> Get(int id)
         {
-            return this.RouteService.GetAsync(id);
+            return this.RouteService.GetAsync(id, nameof(Route.Drivers) + "." + nameof(Driver.User), nameof(Route.Buses));
         }
 
         [HttpGet]

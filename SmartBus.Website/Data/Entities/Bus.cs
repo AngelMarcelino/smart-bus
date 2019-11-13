@@ -13,5 +13,7 @@ namespace SmartBus.Website.Data.Entities
         public int AvailablePlaces { get; set; }
         public int TotalPlaces { get; set; }
         public ICollection<Trip> Trips { get; set; }
+        public int? RouteId { get; set; }
+        public Route Route { get; set; }
     }
 }

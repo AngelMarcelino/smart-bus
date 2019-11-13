@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBus.Website.Data;
 
 namespace SmartBus.Website.Migrations
 {
     [DbContext(typeof(SmartBusDbContext))]
-    partial class SmartBusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191112214128_AddDriverRouteAndBusRouteRelations")]
+    partial class AddDriverRouteAndBusRouteRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -33,8 +33,8 @@ export class ListAdministrator<T extends WithId> {
   }
 
   add() {
-    console.log(this.selectedElementId);
     const toAdd = this.display.find(e => e.id === parseInt(this.selectedElementId, 10));
     this.elements = [...(this.elements || []), toAdd];
+    this.elementsChanges.emit(this.elements);
   }
 }

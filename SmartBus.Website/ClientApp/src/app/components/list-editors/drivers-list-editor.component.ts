@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ListAdministrator } from 'src/app/utils/list-administrator';
 import { IDriver } from 'src/app/models/driver';
+import { IDriverFromDb } from 'src/app/models/route';
 
 
 
@@ -9,20 +10,20 @@ import { IDriver } from 'src/app/models/driver';
   templateUrl: './drivers-list-editor.component.html'
 })
 export class DriversListEditorComponent {
-  list: ListAdministrator<IDriver>;
+  list: ListAdministrator<IDriverFromDb>;
   constructor() {
     this.list = new ListAdministrator();
-    this.driverChanges = this.list.elementsChanges;
+    this.driverChange = this.list.elementsChanges;
   }
   @Input()
-  set displayList(value: IDriver[]) {
+  set displayList(value: IDriverFromDb[]) {
     this.list.displayList = value;
   }
 
   @Input()
-  set driver(value: IDriver[]) {
+  set driver(value: IDriverFromDb[]) {
     this.list.elements = value;
   }
   @Output()
-  driverChanges: EventEmitter<IDriver[]>;
+  driverChange: EventEmitter<IDriverFromDb[]>;
 }

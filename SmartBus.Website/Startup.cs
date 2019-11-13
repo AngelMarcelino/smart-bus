@@ -87,6 +87,7 @@ namespace SmartBus.Website
             services.AddScoped<Service<Trip>>();
             services.AddScoped<Service<Route>>();
             services.AddScoped<UserService>();
+            services.AddScoped<RouteService>();
             services.AddScoped<IEmailSender, EmailSender>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
