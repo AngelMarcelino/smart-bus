@@ -13,5 +13,6 @@ namespace SmartBus.Website.Models
         public string Email { get; set; }
         public DateTime RegisterDate { get; set; }
         public string Phone { get; set; }
+        public int? RouteId { get; set; }
     }
 }

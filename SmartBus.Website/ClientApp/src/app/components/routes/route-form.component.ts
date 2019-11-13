@@ -41,30 +41,31 @@ export class RouteFormComponent {
                 lastLeavingHour: (<string>route.lastLeavingHour || ''),
                 intervalInMinutes: route.intervalInMinutes
               });
+
             });
         }
       });
       busService.getAll()
-        .subscribe(e => {
-          this.displayBuses = e;
-        });
+      .subscribe(e => {
+        this.displayBuses = e.filter(f => !f.routeId);
+      });
       driverService.getAll()
-        .subscribe(f => {
-          this.displayDrivers = f.map(e => <IDriverFromDb>({
-            id: e.id,
-            phone: e.phone,
-            registerDate: e.registerDate,
-            routeId: e.routeId,
-            user: {
-              balance: 0,
-              email: '',
-              id: 0,
-              lastName: e.lastName,
-              name: e.name
-            },
-            userId: 0
-          }));
-        });
+      .subscribe(f => {
+        this.displayDrivers = f.filter(e => !e.routeId).map(e => <IDriverFromDb>({
+          id: e.id,
+          phone: e.phone,
+          registerDate: e.registerDate,
+          routeId: e.routeId,
+          user: {
+            balance: 0,
+            email: '',
+            id: 0,
+            lastName: e.lastName,
+            name: e.name
+          },
+          userId: 0
+        }));
+      });
   }
   routeForm = this.fb.group({
     name: ['', Validators.required],

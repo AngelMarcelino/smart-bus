@@ -29,7 +29,8 @@ namespace SmartBus.Website.Services
                 LastName = e.User.LastName,
                 Name = e.User.Name,
                 Phone = e.Phone,
-                RegisterDate = e.RegisterDate
+                RegisterDate = e.RegisterDate,
+                RouteId = e.RouteId
             };
             this.userManager = userManager;
         }

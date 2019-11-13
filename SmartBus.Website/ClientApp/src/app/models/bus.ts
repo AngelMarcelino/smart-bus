@@ -3,4 +3,5 @@ export interface IBus {
   brand: string;
   model: string;
   availablePlaces: number;
+  routeId?: number;
 }
