@@ -14,6 +14,7 @@ namespace SmartBus.Website.Data.Entities
         public int IntervalInMinutes { get; set; }
         public DateTime FirstLeavingHour { get; set; }
         public DateTime LastLeavingHour { get; set; }
+        public decimal Cost { get; set; }
         public ICollection<Trip> Trips { get; set; }
         public ICollection<Driver> Drivers { get; set; }
         public ICollection<Bus> Buses { get; set; }
