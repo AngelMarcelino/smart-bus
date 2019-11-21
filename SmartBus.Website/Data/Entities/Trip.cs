@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace SmartBus.Website.Data.Entities
 {
+    public enum TripStatus
+    {
+        Started,
+        Finished,
+        Canceled
+    }
     public class Trip : IEntity
     {
         public int Id { get; set; }
@@ -17,5 +23,6 @@ namespace SmartBus.Website.Data.Entities
         public ICollection<Passage> Passages { get; set; }
         public Route Route { get; set; }
         public int RouteId { get; set; }
+        public TripStatus TripStatus { get; set; }
     }
 }

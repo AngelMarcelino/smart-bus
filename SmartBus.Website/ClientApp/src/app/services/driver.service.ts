@@ -26,4 +26,7 @@ export class DriverService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
+  getByUser(userId: number) {
+    return this.http.get<IDriver>(this.baseUrl + '/ByUserId/' + userId);
+  }
 }

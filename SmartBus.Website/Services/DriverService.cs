@@ -84,5 +84,13 @@ namespace SmartBus.Website.Services
             user.Email = driverModel.Email;
             await dbContext.SaveChangesAsync();
         }
+
+        public Task<DriverModel> GetDriverByUserId(int userId)
+        {
+            return dbContext.Drivers
+                .Where(d => d.UserId == userId)
+                .Select(mapExpression)
+                .FirstOrDefaultAsync();
+        }
     }
 }

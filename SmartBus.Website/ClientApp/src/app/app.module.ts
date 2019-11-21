@@ -44,6 +44,9 @@ import { NavAdminComponent } from './components/nav-menu/nav-admin/nav-admin.com
 import { NavUserComponent } from './components/nav-menu/nav-user/nav-user.component';
 import { NavDriverComponent } from './components/nav-menu/nav-driver/nav-driver.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { DriverUserService } from './services/driver-user.service';
+import { RouteScheduleComponent } from './components/route-schedule/route-schedule.component';
+import { CurrentTripComponent } from './components/current-trip/current-trip.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,9 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
     NavDriverComponent,
     MyTripsComponent,
     BusesListEditorComponent,
-    DriversListEditorComponent
+    DriversListEditorComponent,
+    RouteScheduleComponent,
+    CurrentTripComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -131,7 +136,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
     UserService,
     UserGuardService,
     AdminGuardService,
-    DriverGuardService
+    DriverGuardService,
+    DriverUserService
   ],
   bootstrap: [AppComponent]
 })

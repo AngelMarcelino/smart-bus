@@ -37,15 +37,19 @@ namespace SmartRoute.Website.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Route Route)
+        public async Task<IActionResult> Post(Route route)
         {
-            await this.RouteService.AddAsync(Route);
+            route.FirstLeavingHour = route.FirstLeavingHour.ToUniversalTime();
+            route.LastLeavingHour = route.LastLeavingHour.ToUniversalTime();
+            await this.RouteService.AddAsync(route);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Put(Route Route)
+        public async Task<IActionResult> Put(Route route)
         {
-            await this.RouteService.UpdateAsync(Route);
+            route.FirstLeavingHour = route.FirstLeavingHour.ToUniversalTime();
+            route.LastLeavingHour = route.LastLeavingHour.ToUniversalTime();
+            await this.RouteService.UpdateAsync(route);
             return Ok();
         }
 

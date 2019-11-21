@@ -1,0 +1,7 @@
+<div>
+  <div *ngIf="trip === null">No hay viaje en curso</div>
+  <div *ngIf="trip !== null">
+    <h2>Viaje empezado en: {{trip.startDate}}</h2>
+    <button class="btn btn-info" (click)="finishTrip()">Terminar viaje</button>
+  </div>
+</div>

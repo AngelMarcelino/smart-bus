@@ -1,3 +1,33 @@
-<div>
-  My trips
+<div *ngIf="currentRoute">
+  <h1>Bienvenido {{currentDriver?.name}}</h1>
+  <h2>Ruta {{currentRoute?.name}}</h2>
+  <div class="row" *ngIf="!currentTrip">
+    <div class="col-3">
+      Hora del próximo viaje:
+    </div>
+    <div class="col-9">
+      {{nextTripHour}}
+    </div>
+  </div>
+  <form *ngIf="!currentTrip" (submit)="startTrip()" [formGroup]="formGroup">
+    <div class="row mt-5">
+      <div class="col-4 form-group">
+        <label>Autobus</label>
+        <select class="form-control" formControlName="busId">
+          <option value="">Seleccione</option>
+          <option [value]="bus.id" *ngFor="let bus of buses">{{busService.getBusDescription(bus)}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-12">
+        <button type="submit" [disabled]="formGroup.invalid" class="btn btn-primary">Iniciar viaje</button>
+      </div>
+    </div>
+  </form>
 </div>
+<div *ngIf="!currentRoute">
+  <h1>No estas asignado a una ruta</h1>
+</div>
+<app-current-trip [trip]="currentTrip" (tripFinished)="finishTrip()"></app-current-trip>
+<app-route-schedule [route]="currentRoute" (currentHour)="setNextHour($event)"></app-route-schedule>

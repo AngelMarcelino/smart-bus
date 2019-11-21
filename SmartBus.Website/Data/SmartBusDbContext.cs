@@ -32,6 +32,15 @@ namespace SmartBus.Website.Data
                 .WithOne(e => e.Driver)
                 .HasForeignKey<Driver>(e => e.UserId)
                 .IsRequired(true);
+            modelBuilder
+                .Entity<Route>()
+                .Property(e => e.FirstLeavingHour)
+                .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+            modelBuilder
+                .Entity<Route>()
+                .Property(e => e.LastLeavingHour)
+                .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
             base.OnModelCreating(modelBuilder);
         }
     }

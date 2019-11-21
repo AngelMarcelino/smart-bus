@@ -18,10 +18,15 @@ namespace SmartDriver.Website.Controllers
         //77301499
     {
         private readonly DriverService DriverService;
+        private readonly TripService tripService;
 
-        public DriverController(DriverService DriverService)
+        public DriverController(
+            DriverService DriverService,
+            TripService tripService
+        )
         {
             this.DriverService = DriverService;
+            this.tripService = tripService;
         }
 
         [HttpGet("{id}")]
@@ -55,5 +60,20 @@ namespace SmartDriver.Website.Controllers
             await this.DriverService.DeleteAsync(id);
             return Ok();
         }
+
+        [HttpGet("[action]/{userId}")]
+        public async Task<DriverModel> ByUserId(int userId)
+        {
+            return await this.DriverService.GetDriverByUserId(userId);
+        }
+
+        [HttpGet("[action]/{driverId}")]
+        public async Task<Trip> GetCurrentTrip(int driverId)
+        {
+            var trip = await tripService.GetCurrentTripOfADriverAsync(driverId);
+            return trip;
+        }
+
+        
     }
 }
