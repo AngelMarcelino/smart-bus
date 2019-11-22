@@ -1,12 +1,16 @@
 <h1>Bienvenido {{currentUser.name}}</h1>
 
 <div class="row">
-  <div class="col-md-4 col-12">
-    <img class="img-thumbnail" style="width: 200px" [src]="imagePath"/>
+  <div class="col-lg-2 col-12">
+    <img class="img-thumbnail" [src]="imagePath"/>
   </div>
+  <div class="col-md-4 col-12">
+      Saldo: {{currentUser.balance | currency}}
+  </div>
+  <div class="col-md-4 col-12">
 
+  </div>
 </div>
-
 <div class="row">
   <div class="col-12">
     <label for="profile-image" class="btn btn-primary">Cambiar foto de perfil</label>
