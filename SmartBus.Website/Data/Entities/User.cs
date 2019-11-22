@@ -16,5 +16,6 @@ namespace SmartBus.Website.Data.Entities
         public UserCategory UserCategory { get; set; }
         public ICollection<Passage> Passages { get; set; }
         public Driver Driver { get; set; }
+        public string ImageExtension { get; set; }
     }
 }

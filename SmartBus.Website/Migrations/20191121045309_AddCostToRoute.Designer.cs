@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBus.Website.Data;
 
 namespace SmartBus.Website.Migrations
 {
     [DbContext(typeof(SmartBusDbContext))]
-    partial class SmartBusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191121045309_AddCostToRoute")]
+    partial class AddCostToRoute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,8 +257,6 @@ namespace SmartBus.Website.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("ImageExtension");
 
                     b.Property<string>("LastName");
 

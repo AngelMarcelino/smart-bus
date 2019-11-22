@@ -26,4 +26,11 @@ export class UserService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
+  uploadProfileImage(userId: number, formData: FormData) {
+    return this.http.post('/api/user/UploadProfileImage/' + userId, formData, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+  }
 }

@@ -47,6 +47,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { DriverUserService } from './services/driver-user.service';
 import { RouteScheduleComponent } from './components/route-schedule/route-schedule.component';
 import { CurrentTripComponent } from './components/current-trip/current-trip.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { UserRoutes } from './routes/user-routes';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,8 @@ import { CurrentTripComponent } from './components/current-trip/current-trip.com
     BusesListEditorComponent,
     DriversListEditorComponent,
     RouteScheduleComponent,
-    CurrentTripComponent
+    CurrentTripComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -109,7 +112,7 @@ import { CurrentTripComponent } from './components/current-trip/current-trip.com
           {
             path: 'user',
             canActivate: [UserGuardService],
-            children: AdminRoutes
+            children: UserRoutes
           }
         ]
       }
