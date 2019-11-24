@@ -14,38 +14,38 @@ namespace SmartBus.Website.Controllers
     public class ChargesController : Controller
     {
         private readonly Service<User> chargesService;
-        private readonly Service<Route> routeService;
+        private readonly TripService tripService;
         private readonly Service<Passage> passagesService;
 
         public ChargesController(
             Service<User> chargesService, 
-            Service<Route> routeService, 
+            TripService tripService, 
             Service<Passage> passagesService
         )
         {
             this.chargesService = chargesService;
-            this.routeService = routeService;
+            this.tripService = tripService;
             this.passagesService = passagesService;
         }
 
         [HttpPut("charge")]
-        public async Task<IActionResult> Charge([FromQuery]int userId, [FromQuery]int routeId)
+        public async Task<IActionResult> Charge([FromQuery]int userId, [FromQuery]int tripId)
         {
             User toChargeUser = await this.chargesService
                 .GetAsync(userId);
-            Route toAboardRoute = await this.routeService
-                .GetAsync(routeId);
-            if(toAboardRoute != null && toChargeUser != null)
+            Trip toAboardTrip = await this.tripService
+                .GetAsync(tripId, nameof(Trip.Route));
+            if(toAboardTrip != null && toChargeUser != null)
             {
-                if(toChargeUser.Balance > toAboardRoute.Cost)
+                if(toChargeUser.Balance > toAboardTrip.Route.Cost)
                 {
-                    toChargeUser.Balance -= toAboardRoute.Cost;
+                    toChargeUser.Balance -= toAboardTrip.Route.Cost;
                     await this.chargesService.UpdateAsync(toChargeUser);
                     await this.passagesService.AddAsync(new Passage{
-                        Amount = toAboardRoute.Cost,
+                        Amount = toAboardTrip.Route.Cost,
                         Date = DateTime.UtcNow,
                         UserId = toChargeUser.Id,
-                        TripId = toAboardRoute.Id
+                        TripId = toAboardTrip.Id
                     });
                     return Ok(new {Status = "Succesful", User = toChargeUser});
                 }

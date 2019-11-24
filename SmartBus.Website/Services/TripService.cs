@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SmartBus.Website.Data;
 using SmartBus.Website.Data.Entities;
+using SmartBus.Website.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,17 @@ namespace SmartBus.Website.Services
 {
     public class TripService : Service<Trip>
     {
-        public TripService(SmartBusDbContext dbContext) : base(dbContext)
-        {
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
+        public TripService(
+            SmartBusDbContext dbContext,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager
+        ) : base(dbContext)
+        {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
         public async Task<Trip> StartTripAsync(
             int driverId,
@@ -57,5 +67,22 @@ namespace SmartBus.Website.Services
             trip.EndDate = DateTime.UtcNow;
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task NewPassageAsync(int tripId, LoginModel loginModel)
+        {
+            var trip = await GetAsync(tripId, nameof(Trip.Route));
+            var user = await userManager.FindByEmailAsync(loginModel.Email);
+            var route = trip.Route;
+            var passage = new Passage()
+            {
+                Amount = route.Cost,
+                Date = DateTime.UtcNow,
+                TripId = tripId,
+                UserId = user.Id
+            };
+            dbContext.Passages.Add(passage);
+            await dbContext.SaveChangesAsync();
+        }
+
     }
 }

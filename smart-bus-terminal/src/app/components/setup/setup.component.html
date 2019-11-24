@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="formGroup" (submit)="formSubmit()">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label>Ruta: </label>
+            <select class="form-control" formControlName="routeId">
+              <option value="">Seleccione</option>
+              <option [value]="route.id" *ngFor="let route of routes">
+                {{route.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label>Conductor</label>
+            <select class="form-control" formControlName="driverId">
+              <option value="">Seleccione una ruta para cargar a los conductores</option>
+              <option [value]="driver.id" *ngFor="let driver of drivers">{{driver.user.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="formGroup.invalid">Empezar</button>
+    </form>
+  </div>
+</div>

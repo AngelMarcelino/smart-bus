@@ -33,7 +33,7 @@ namespace SmartRoute.Website.Controllers
         [HttpGet]
         public Task<IEnumerable<Route>> Get()
         {
-            return this.RouteService.GetEntitiesAsync();
+            return this.RouteService.GetEntitiesAsync(nameof(Route.Drivers) + "." + nameof(Driver.User), nameof(Route.Buses), nameof(Route.Trips));
         }
 
         [HttpPost]

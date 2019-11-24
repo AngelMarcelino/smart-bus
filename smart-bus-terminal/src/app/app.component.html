@@ -1,0 +1,7 @@
+<div *ngIf="!currentTrip">
+  <app-setup (currentTrip)="setCurrentTrip($event)"></app-setup>
+
+</div>
+<div *ngIf="currentTrip">
+  <app-info [currentTrip]="currentTrip"></app-info>
+</div>

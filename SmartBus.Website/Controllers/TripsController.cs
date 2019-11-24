@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartBus.Website.Data.Entities;
+using SmartBus.Website.Models;
 using SmartBus.Website.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,9 @@ namespace SmartTrip.Website.Controllers
     {
         private readonly TripService TripService;
 
-        public TripController(TripService TripService)
+        public TripController(
+            TripService TripService
+        )
         {
             this.TripService = TripService;
         }
@@ -74,6 +78,14 @@ namespace SmartTrip.Website.Controllers
         {
             await TripService.FinishDriversCurrentTripAsync(driverId);
             return Ok();
+        }
+
+        [HttpPost("[action]/{tripId}")]
+        public async Task<object> NewPassage(int tripId, LoginModel loginModel)
+        {
+            await this.TripService.NewPassageAsync(tripId, loginModel);
+            return Ok(new { Success = true });
+
         }
     }
 }

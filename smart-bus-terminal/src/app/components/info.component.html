@@ -1,0 +1,35 @@
+<h1>Info</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ruta</th>
+      <th>Autobus</th>
+      <th>Conductor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{currentTrip.route.name}}</td>
+      <td>{{currentTrip.bus.brand}} {{currentTrip.bus.model}} {{currentTrip.bus.id}}</td>
+      <td>{{currentTrip.driver.user.name}} {{currentTrip.driver.user.lastName}}</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Nuevo pasaje</h2>
+<form [formGroup]="formGroup" (submit)="newPassage()">
+  <div class="row">
+    <div class=col-6>
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" formControlName="user" class="form-control">
+      </div>
+    </div>
+    <div class=col-6>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="text" formControlName="password" class="form-control">
+      </div>
+    </div>
+  </div>
+  <button type="submit">Enviar</button>
+</form>
