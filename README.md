@@ -31,7 +31,7 @@ Descargar [NodeJS](https://nodejs.org/en/download/) e instalar
 
 **Ejecutar aplicación**
 
--Renombrar archivo appsettings.example.json en SmartBus.Website a appsettings.json en
-    -ConnectionStrings asegurarse que el parámetro Data Source indique la ruta a la instancia instalada de sql, si la instancia de sql server que se instaló fué la instancia por defecto entonces quedaría "DefaultConnection":  "Server=localhost;Database=smartbus;User=root;Password=;"
-    -En el mismo archivo modificar la sección EmailCredentials con credenciales propias para utilizar las funciones de envio de correo.
+- Renombrar archivo appsettings.example.json en SmartBus.Website a appsettings.json en
+    - ConnectionStrings asegurarse que el parámetro Data Source indique la ruta a la instancia instalada de sql, si la instancia de sql server que se instaló fué la instancia por defecto entonces quedaría "DefaultConnection":  "Server=localhost;Database=smartbus;User=root;Password=;"
+    - En el mismo archivo modificar la sección EmailCredentials con credenciales propias para utilizar las funciones de envio de correo.
 - Abrir el archivo SmartBus.sln con visual studio comunity y presionar f5
