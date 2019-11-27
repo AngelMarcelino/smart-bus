@@ -1,0 +1,19 @@
+<h1>Número de viajes por usuario</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Cuenta de viajes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td>{{row.id}}</td>
+      <td>{{row.name}}</td>
+      <td>{{row.lastName}}</td>
+      <td>{{row.tripCount}}</td>
+    </tr>
+  </tbody>
+</table>

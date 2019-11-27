@@ -10,6 +10,7 @@ export interface IRoute {
   lastLeavingHour: Date | string;
   drivers?: IDriverFromDb[];
   buses?: IBus[];
+  cost: number;
 }
 
 export interface IDriverFromDb {

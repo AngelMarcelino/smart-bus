@@ -24,6 +24,12 @@
     <input class="form-control" type="text" name="intervalInMinutes" formControlName="intervalInMinutes"/>
     <input class="form-control" type="hidden" name="id" formControlName="id"/>
   </div>
+  <div class="form-group">
+      <label>
+        Costo
+      </label>
+      <input class="form-control" type="number" name="cost" formControlName="cost"/>
+    </div>
   <div class="row">
     <div class="col-6">
         <app-buses-list-editor [displayList]="displayBuses" [(buses)]="buses">

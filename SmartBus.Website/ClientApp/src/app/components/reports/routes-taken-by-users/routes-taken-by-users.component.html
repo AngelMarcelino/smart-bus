@@ -1,0 +1,20 @@
+<h1>Rutas tomadas por usuarios</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ruta</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of routesTakenByUser">
+      <td>
+        <ul>
+          <li *ngFor="let item of row.routes">{{item.routeName}}</li>
+        </ul>
+      <td>{{row.name}}</td>
+      <td>{{row.lastName}}</td>
+    </tr>
+  </tbody>
+</table>

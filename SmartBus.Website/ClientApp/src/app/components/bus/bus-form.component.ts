@@ -38,7 +38,7 @@ export class BusFormComponent {
       id: this.busForm.controls['id'].value || 0,
       brand: this.busForm.controls['brand'].value,
       model: this.busForm.controls['model'].value,
-      availablePlaces: this.busForm['availablePlaces'].value
+      availablePlaces: this.busForm.controls['availablePlaces'].value
     };
     this.save();
   }

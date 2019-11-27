@@ -49,6 +49,10 @@ import { RouteScheduleComponent } from './components/route-schedule/route-schedu
 import { CurrentTripComponent } from './components/current-trip/current-trip.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserRoutes } from './routes/user-routes';
+import { TotalTripsReportComponent } from './components/reports/total-report/total-trips-report.component';
+import { ReportsService } from './services/reports.service';
+import { MainReportViewComponent } from './components/reports/main-report-view.component';
+import { RoutesTakenByUserComponent } from './components/reports/routes-taken-by-users/routes-taken-by-users.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +83,10 @@ import { UserRoutes } from './routes/user-routes';
     DriversListEditorComponent,
     RouteScheduleComponent,
     CurrentTripComponent,
-    ProfileComponent
+    ProfileComponent,
+    TotalTripsReportComponent,
+    MainReportViewComponent,
+    RoutesTakenByUserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -140,7 +147,8 @@ import { UserRoutes } from './routes/user-routes';
     UserGuardService,
     AdminGuardService,
     DriverGuardService,
-    DriverUserService
+    DriverUserService,
+    ReportsService
   ],
   bootstrap: [AppComponent]
 })

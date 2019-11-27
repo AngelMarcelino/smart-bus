@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartBus.Website.Data.Entities;
+using SmartBus.Website.DomainExeptions;
 using SmartBus.Website.Models;
 using SmartBus.Website.Services;
 using System;
@@ -83,7 +84,15 @@ namespace SmartTrip.Website.Controllers
         [HttpPost("[action]/{tripId}")]
         public async Task<object> NewPassage(int tripId, LoginModel loginModel)
         {
-            await this.TripService.NewPassageAsync(tripId, loginModel);
+            try
+            {
+                await this.TripService.NewPassageAsync(tripId, loginModel);
+            }
+            catch (InsufficientFoundsException ex)
+            {
+                return Ok(new { Success = false, Reason = "InsufficientFounds", Code = 1 });
+            }
+            
             return Ok(new { Success = true });
 
         }

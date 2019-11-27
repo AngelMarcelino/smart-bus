@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmartBus.Website.Data;
 using SmartBus.Website.Data.Entities;
+using SmartBus.Website.DomainExeptions;
 using SmartBus.Website.Models;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,12 @@ namespace SmartBus.Website.Services
             var trip = await GetAsync(tripId, nameof(Trip.Route));
             var user = await userManager.FindByEmailAsync(loginModel.Email);
             var route = trip.Route;
+            var balance = user.Balance;
+            if (route.Cost > balance)
+            {
+                throw new InsufficientFoundsException();
+            }
+            user.Balance -= route.Cost;
             var passage = new Passage()
             {
                 Amount = route.Cost,

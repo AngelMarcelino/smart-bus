@@ -39,7 +39,8 @@ export class InfoComponent implements OnInit {
       .subscribe((response: any) => {
         if (response.success) {
           alert('Pase');
-        } else {
+          this.formGroup.reset();
+        } else if(response.code === 1) {
           alert('Fondos insuficientes');
         }
       });

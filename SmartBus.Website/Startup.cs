@@ -1,3 +1,4 @@
+using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -89,6 +90,8 @@ namespace SmartBus.Website
             services.AddScoped<UserService>();
             services.AddScoped<RouteService>();
             services.AddScoped<TripService>();
+            services.AddScoped<StoreProcedureConnection>();
+            services.AddScoped<ReportsService>();
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddCors(options =>
             {

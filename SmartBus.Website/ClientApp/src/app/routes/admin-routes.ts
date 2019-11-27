@@ -18,6 +18,7 @@ import { UserListComponent } from '../components/users/user-list.component';
 
 import { UserFormComponent } from '../components/users/user-form.component';
 import { Route } from '@angular/router';
+import { MainReportViewComponent } from '../components/reports/main-report-view.component';
 
 
 export const AdminRoutes: Route[] = [
@@ -106,6 +107,10 @@ export const AdminRoutes: Route[] = [
         component: UserFormComponent
       }
     ]
+  },
+  {
+    path: 'reports',
+    component: MainReportViewComponent
   }
 ];
 

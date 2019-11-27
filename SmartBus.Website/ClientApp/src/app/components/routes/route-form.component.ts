@@ -37,9 +37,12 @@ export class RouteFormComponent {
               this.routeForm.setValue({
                 name: route.name,
                 id: route.id,
-                firstLeavingHour: (<string>route.firstLeavingHour || ''),
-                lastLeavingHour: (<string>route.lastLeavingHour || ''),
-                intervalInMinutes: route.intervalInMinutes
+                firstLeavingHour: new Date(new Date(<string>route.firstLeavingHour || '')
+                  .getTime() - new Date().getTimezoneOffset() * 60 * 1000).toISOString().substring(0, 16),
+                lastLeavingHour: new Date(new Date(<string>route.lastLeavingHour || '')
+                  .getTime() - new Date().getTimezoneOffset() * 60 * 1000).toISOString().substring(0, 16),
+                intervalInMinutes: route.intervalInMinutes,
+                cost: route.cost
               });
 
             });
@@ -61,7 +64,7 @@ export class RouteFormComponent {
             email: '',
             id: 0,
             lastName: e.lastName,
-            name: e.name
+            name: e.name,
           },
           userId: 0
         }));
@@ -72,6 +75,7 @@ export class RouteFormComponent {
     firstLeavingHour: ['', Validators.required],
     lastLeavingHour: ['', Validators.required],
     intervalInMinutes: 15,
+    cost: ['', Validators.required],
     id: [0]
   });
   onSubmit() {
@@ -82,7 +86,8 @@ export class RouteFormComponent {
       firstLeavingHour: this.routeForm.controls['firstLeavingHour'].value,
       intervalInMinutes: this.routeForm.controls['intervalInMinutes'].value,
       buses: [...this.buses],
-      drivers: [...this.drivers]
+      drivers: [...this.drivers],
+      cost: this.routeForm.controls['cost'].value
     };
     this.save();
   }
