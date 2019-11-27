@@ -1,10 +1,10 @@
 # Proyecto SmartBus
 ---
-Por Angel Marcelino Gonzalez Mayoral y Eric López Solís
-Proyecto creado para a materia de Programación Web
+Por Angel Marcelino Gonzalez Mayoral y Eric López Solís.
+Proyecto creado para a materia de Programación Web.
 ## Frameworks y librerías utilizadas
 
-Estte proyecto está hecho con Asp.NET Core y Entity framework configurado con SQL Server para el servidor
+Estte proyecto está hecho con Asp.NET Core y Entity framework configurado con MariaDB para el servidor.
 Utilizamos Angular 8 para la aplicación cliente.
 
 
@@ -17,13 +17,15 @@ Al instalar seleccionar la carga de trabajo "Desarrollo de ASP.NET y Web"
 Se puede descargar en el enlace [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2/)
 
 
-**SQL Server**
-    Descargar [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads/) e instalar
-    1. Instalar una instancia
+**MariaDB/MySql**
+    Descargar [MariaDB](https://mariadb.org/download/) e instalar
+    1. Crear una base de datos llamada smartbus
 
 **NodeJS**
 Descargar [NodeJS](https://nodejs.org/en/download/) e instalar
 
 **Ejecutar aplicación**
-- En el archivo package.json en la sección DefaultConnection que se encuentra dentro de ConnectionStrings asegurarse que el parámetro Data Source indique la ruta a la instancia instalada de sql, si la instancia de sql server que se instaló fué la instancia por defecto entonces quedaría "DefaultConnection": "Data Source=.;Initial Catalog=smartbus;Integrated Security=true"
+-Renombrar archivo appsettings.example.json en SmartBus.Website a appsettings.json en
+     -ConnectionStrings asegurarse que el parámetro Data Source indique la ruta a la instancia instalada de sql, si la instancia de sql server que se instaló fué la instancia por defecto entonces quedaría "DefaultConnection":  "Server=localhost;Database=smartbus;User=root;Password=;"
+     -En el mismo archivo modificar la sección EmailCredentials con credenciales propias para utilizar las funciones de envio de correo.
 - Abrir el archivo SmartBus.sln con visual studio comunity y presionar f5
