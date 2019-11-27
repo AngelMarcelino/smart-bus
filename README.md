@@ -1,7 +1,8 @@
 # Proyecto SmartBus
 ---
 Por Angel Marcelino Gonzalez Mayoral y Eric López Solís.
-Proyecto creado para a materia de Programación Web.
+
+Proyecto creado para la materia de Programación Web.
 ## Frameworks y librerías utilizadas
 
 Estte proyecto está hecho con Asp.NET Core y Entity framework configurado con MariaDB para el servidor.
